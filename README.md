@@ -46,28 +46,47 @@ cp .env.example .env
 # 编辑 .env 填入你的配置
 ```
 
-### 3. 启动所有服务
+### 3. 一键启动（推荐）
 
-```bash
-docker compose up -d
+**Windows:**
+```cmd
+scripts\start.bat
 ```
+
+**Linux / macOS:**
+```bash
+chmod +x scripts/*.sh
+./scripts/start.sh
+```
+
+脚本会自动完成：环境检查 → 创建 .env → 构建镜像 → 启动容器 → 数据库迁移 → 种子数据
 
 服务启动后：
 - 🌐 前端: http://localhost:5173
 - 🔌 后端 API: http://localhost:8000
 - 📚 API 文档: http://localhost:8000/docs
 
-### 4. 初始化数据库
+### 4. 其他命令
 
 ```bash
-# 运行数据库迁移
-docker compose exec backend alembic upgrade head
+# 停止服务
+scripts\start.bat --stop          # Windows
+./scripts/start.sh --stop         # Linux/macOS
 
-# 插入种子数据（默认分类 + 管理员账户）
-docker compose exec backend python -m app.scripts.seed
+# 重新构建
+scripts\start.bat --rebuild       # Windows
+./scripts/start.sh --rebuild      # Linux/macOS
+
+# 数据库备份
+scripts\backup.bat                # Windows
+./scripts/backup.sh               # Linux/macOS
+
+# 数据库恢复
+scripts\restore.bat <备份文件>     # Windows
+./scripts/restore.sh <备份文件>    # Linux/macOS
 ```
 
-默认管理员: `admin@gamewire.dev` / `admin123`
+默认管理员: `admin@gamewire.local` / (见 .env 中 `DEFAULT_ADMIN_PASSWORD`)
 
 ## 📁 项目结构
 
