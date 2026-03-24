@@ -1,0 +1,19 @@
+# 默认行为：自动处理行尾
+* text=auto
+
+# Shell 脚本强制使用 LF (Linux 换行符)
+*.sh text eol=lf
+
+# Batch 脚本强制使用 CRLF (Windows 换行符)
+*.bat text eol=crlf
+
+# Docker 相关文件使用 LF
+Dockerfile text eol=lf
+docker-compose.yml text eol=lf
+.dockerignore text eol=lf
+
+# Python 文件使用 LF
+*.py text eol=lf
+
+# 配置模板使用 LF
+*.example text eol=lf
